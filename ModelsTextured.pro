@@ -4,6 +4,10 @@
 #
 #-------------------------------------------------
 
+
+//TEST OB GITHUBT FUNKTIONIERT
+
+
 QT       += gui core widgets opengl multimedia
 TARGET = ModelsTextured
 TEMPLATE = app
@@ -26,7 +30,7 @@ android {
 }
 
 
-
+//nicht vergessen das anzupassen
 SGFRAMEWORKINCLUDEPATH = "../SGFrameworkLib"
 SGFRAMEWORKPATH = $${SGFRAMEWORKINCLUDEPATH}
 PRE_TARGETDEPS += $${SGFRAMEWORKPATH}/libSGFramework.a
