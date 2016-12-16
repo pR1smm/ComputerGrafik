@@ -3,6 +3,8 @@
 #include "drawable.h"
 #include "simplesphere.h"
 
+//Philipp hängt überall seinen pimmel rein
+
 class Planet : public Drawable
 {
 public:

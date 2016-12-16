@@ -12,6 +12,8 @@
 #include "soundmanager.h"
 #include "shadermanager.h"
 
+//Philipp war hier auch
+
 Node *initScene1();
 Node *initScene2();
 
