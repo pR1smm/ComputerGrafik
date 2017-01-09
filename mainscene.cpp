@@ -33,29 +33,33 @@ Node* initScene1()
     //Objekte anlegen
     QString path(SRCDIR); //aus .pro-File!
 
-    Node *root = new Node();
+    //Keyboardtransformation
+    KeyboardTransformation *ogerPfad = new KeyboardTransformation();
+    float ogerGeschwindigkeit = 1.0; //Geschwindigkeit mit der sich der Oger bewegen soll
 
     //Geometrien können mehrfach verwendet werden -> gleiche Geometrie, anderes Erscheinungsbild
-     Geometry* g = new TriangleMesh(path + QString("/modelstextures/ogrehead.obj"));
+    Geometry* g = new TriangleMesh(path + QString("/modelstextures/ogrehead.obj"));
     Drawable* model = new Drawable(g);
     Texture* t;
     Shader* s = ShaderManager::getShader(path + QString("/shader/texture.vert"), path + QString("/shader/texture.frag"));
-    Transformation *pos = new Transformation();
-
-    // Nodes anlegen
-    Node* posNode = new Node(pos);
-    Node* modelNode = new Node(model);
-
     //Texturen laden
     t = model->getProperty<Texture>();
     t->loadPicture(path + QString("/modelstextures/ogrehead_diffuse.png"));
-
     //Shader fuer Textur setzen
     model->setShader(s);
 
+    // Nodes anlegen
+    Node* modelNode = new Node(model);
+    Node *root = new Node(); //Die Wurzel alles Bösen
+    Node *ogerNode = new Node(model);
+    Node *ogerBewegung = new Node(ogerPfad);
+
+    //Keys belegen
+    ogerPfad->setTransKeysUpper('x', 'y', 'z');
+    ogerPfad->setTransspeed(0.1);
     // Baum aufbauen
-    root->addChild(posNode);
-    posNode->addChild(modelNode);
+    root->addChild(ogerBewegung);
+    ogerBewegung->addChild(ogerNode);
 
     return(root);
 }
