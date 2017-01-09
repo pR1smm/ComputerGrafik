@@ -12,11 +12,6 @@
 #include "soundmanager.h"
 #include "shadermanager.h"
 
-//Philipp war hier auch
-//Philipp war nochmal hier
-//Chris war hier
-//Andrej war hier
-
 Node *initScene1();
 Node *initScene2();
 

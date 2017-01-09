@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 
-//TEST OB GITHUBT FUNKTIONIERT
 
 
 QT       += gui core widgets opengl multimedia
@@ -30,7 +29,7 @@ android {
 }
 
 
-//nicht vergessen das anzupassen
+#//nicht vergessen das anzupassen
 SGFRAMEWORKINCLUDEPATH = "../SGFrameworkLib"
 SGFRAMEWORKPATH = $${SGFRAMEWORKINCLUDEPATH}
 PRE_TARGETDEPS += $${SGFRAMEWORKPATH}/libSGFramework.a
@@ -40,4 +39,8 @@ LIBS += $${SGFRAMEWORKPATH}/libSGFramework.a
 DEFINES += SRCDIR=\\\"$${_PRO_FILE_PWD_}\\\"
 
 SOURCES += \
-    myscene.cpp
+    mainscene.cpp \
+    #myscene.cpp
+
+HEADERS += \
+    mainscene.h
