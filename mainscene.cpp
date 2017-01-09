@@ -15,7 +15,7 @@ Node* initScene1();
 
 void SceneManager::initScenes()
 {
-    ControllableCamera* cam = new ControllableCamera();
+    Camera* cam = new Camera();
     RenderingContext* myContext = new RenderingContext(cam);
     unsigned int myContextNr = SceneManager::instance()->addContext(myContext);
     unsigned int myScene = SceneManager::instance()->addScene(initScene1());
@@ -35,7 +35,7 @@ Node* initScene1()
 
     //Keyboardtransformation
     KeyboardTransformation *ogerPfad = new KeyboardTransformation();
-    float ogerGeschwindigkeit = 1.0; //Geschwindigkeit mit der sich der Oger bewegen soll
+    float ogerGeschwindigkeit = 0.02; //Geschwindigkeit mit der sich der Oger bewegen soll
 
     //Geometrien können mehrfach verwendet werden -> gleiche Geometrie, anderes Erscheinungsbild
     Geometry* g = new TriangleMesh(path + QString("/modelstextures/ogrehead.obj"));
@@ -55,8 +55,9 @@ Node* initScene1()
     Node *ogerBewegung = new Node(ogerPfad);
 
     //Keys belegen
-    ogerPfad->setTransKeysUpper('x', 'y', 'z');
-    ogerPfad->setTransspeed(0.1);
+    ogerPfad->setTransspeed(ogerGeschwindigkeit);
+    ogerPfad->setTransKeys('a', 'd', 'w', 's', KeyboardTransformation::NoKey, KeyboardTransformation::NoKey);
+
     // Baum aufbauen
     root->addChild(ogerBewegung);
     ogerBewegung->addChild(ogerNode);
