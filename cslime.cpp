@@ -37,6 +37,8 @@ CSlime::CSlime(PhysicEngine *eng)
      //Objekt in der Physik engine registrieren
      v_Slime->getPhysicObject()->registerPhysicObject();
 
+     // Character Ticker der für die Steuerung unser Charaktere veranwortlich ist
+     new CharacterTicker(v_CharacterWithCam);
 
 }
 

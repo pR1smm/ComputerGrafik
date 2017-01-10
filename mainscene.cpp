@@ -19,6 +19,12 @@
 #include "cslime.h"
 
 Node* initScene1();
+int v_Slot;
+PhysicEngine* v_PhysicEngine;
+Node* root;
+CSlime* slime;
+Drawable* v_Plane;
+QString path(SRCDIR);
 
 void SceneManager::initScenes()
 {
@@ -34,29 +40,20 @@ void SceneManager::initScenes()
     SceneManager::instance()->setActiveContext(myContextNr);
     //    SceneManager::instance()->setFullScreen();
 }
-
-Node* initScene1()
-{
-
-
-    QString path(SRCDIR);
-
+void init(){
     // Physic Engine Erzeugen und einen Pointer auf Instanz holen
-    int v_Slot = PhysicEngineManager::createNewPhysicEngineSlot(PhysicEngineName::BulletPhysicsLibrary);
-    PhysicEngine* v_PhysicEngine = PhysicEngineManager::getPhysicEngineBySlot(v_Slot);
-    Node* root = new Node;
+    PhysicEngineManager::createNewPhysicEngineSlot(PhysicEngineName::BulletPhysicsLibrary);
+    v_PhysicEngine = PhysicEngineManager::getPhysicEngineBySlot(v_Slot);
+    root = new Node;
 
-    //Slime erzeugen
-    CSlime* slime = new CSlime(v_PhysicEngine);
-
+}
+void setNodes(){
     root->addChild(new Node(slime->getSlimeMesh()));
-
-
-    // Character Ticker der für die Steuerung unser Charaktere veranwortlich ist
-    new CharacterTicker(slime->v_CharacterWithCam);
-
+    root->addChild(new Node(v_Plane));
+}
+void setPlane(){
     // Simple Plane laden
-    Drawable* v_Plane = new Drawable(new SimplePlane(20.f));
+    v_Plane = new Drawable(new SimplePlane(20.f));
     v_Plane->getProperty<ModelTransformation>()->rotate(90, 1.f, 0.f, 0.f);
     v_Plane->setStaticGeometry(true); // Der Oberfläche ein statisches verhalten zuweisen
     PhysicObject* v_PlanePhys = v_PhysicEngine->createNewPhysicObject(v_Plane);
@@ -65,6 +62,23 @@ Node* initScene1()
     v_PlanePhys->setConstructionInfo(v_Constrinf);
     v_PlanePhys->registerPhysicObject();
 
-    root->addChild(new Node(v_Plane));
+
+}
+
+Node* initScene1()
+{
+
+    //Initioalisiert globale Variablen
+    init();
+
+    //Slime erzeugen
+    slime = new CSlime(v_PhysicEngine);
+
+    //Plane erzeugen (Temporär)
+    setPlane();
+
+    //setzt die Objekte in die scene
+    setNodes();
     return root;
 }
+
