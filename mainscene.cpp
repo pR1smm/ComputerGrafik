@@ -1,21 +1,28 @@
 #include "opengl.h"
-#include "scenemanager.h"
-#include "transformation.h"
+#include "scene.h"
+#include "modeltransformation.h"
 #include "keyboardtransformation.h"
-#include "mainwindow.h"
-#include "controllablecamera.h"
-#include "screenrenderer.h"
+#include "color.h"
+#include "simplecube.h"
+#include "simpleplane.h"
+#include "simplesphere.h"
 #include "trianglemesh.h"
 #include "texture.h"
-#include "shader.h"
-#include "listener.h"
+#include "charakter.h"
+#include "mainwindow.h"
+#include "scenemanager.h"
+#include "screenrenderer.h"
 #include "shadermanager.h"
+#include "texture.h"
+#include "shader.h"
+
+#include "cslime.h"
 
 Node* initScene1();
 
 void SceneManager::initScenes()
 {
-    Camera* cam = new Camera();
+    Camera* cam = new Camera;
     RenderingContext* myContext = new RenderingContext(cam);
     unsigned int myContextNr = SceneManager::instance()->addContext(myContext);
     unsigned int myScene = SceneManager::instance()->addScene(initScene1());
@@ -30,37 +37,34 @@ void SceneManager::initScenes()
 
 Node* initScene1()
 {
-    //Objekte anlegen
-    QString path(SRCDIR); //aus .pro-File!
 
-    //Keyboardtransformation
-    KeyboardTransformation *ogerPfad = new KeyboardTransformation();
-    float ogerGeschwindigkeit = 0.02; //Geschwindigkeit mit der sich der Oger bewegen soll
 
-    //Geometrien können mehrfach verwendet werden -> gleiche Geometrie, anderes Erscheinungsbild
-    Geometry* g = new TriangleMesh(path + QString("/modelstextures/ogrehead.obj"));
-    Drawable* model = new Drawable(g);
-    Texture* t;
-    Shader* s = ShaderManager::getShader(path + QString("/shader/texture.vert"), path + QString("/shader/texture.frag"));
-    //Texturen laden
-    t = model->getProperty<Texture>();
-    t->loadPicture(path + QString("/modelstextures/ogrehead_diffuse.png"));
-    //Shader fuer Textur setzen
-    model->setShader(s);
+    QString path(SRCDIR);
 
-    // Nodes anlegen
-    Node* modelNode = new Node(model);
-    Node *root = new Node(); //Die Wurzel alles Bösen
-    Node *ogerNode = new Node(model);
-    Node *ogerBewegung = new Node(ogerPfad);
+    // Physic Engine Erzeugen und einen Pointer auf Instanz holen
+    int v_Slot = PhysicEngineManager::createNewPhysicEngineSlot(PhysicEngineName::BulletPhysicsLibrary);
+    PhysicEngine* v_PhysicEngine = PhysicEngineManager::getPhysicEngineBySlot(v_Slot);
+    Node* root = new Node;
 
-    //Keys belegen
-    ogerPfad->setTransspeed(ogerGeschwindigkeit);
-    ogerPfad->setTransKeys('a', 'd', 'w', 's', KeyboardTransformation::NoKey, KeyboardTransformation::NoKey);
+    //Slime erzeugen
+    CSlime* slime = new CSlime(v_PhysicEngine);
 
-    // Baum aufbauen
-    root->addChild(ogerBewegung);
-    ogerBewegung->addChild(ogerNode);
+    root->addChild(new Node(slime->getSlimeMesh()));
 
-    return(root);
+
+    // Character Ticker der für die Steuerung unser Charaktere veranwortlich ist
+    new CharacterTicker(slime->v_CharacterWithCam);
+
+    // Simple Plane laden
+    Drawable* v_Plane = new Drawable(new SimplePlane(20.f));
+    v_Plane->getProperty<ModelTransformation>()->rotate(90, 1.f, 0.f, 0.f);
+    v_Plane->setStaticGeometry(true); // Der Oberfläche ein statisches verhalten zuweisen
+    PhysicObject* v_PlanePhys = v_PhysicEngine->createNewPhysicObject(v_Plane);
+    PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
+    v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
+    v_PlanePhys->setConstructionInfo(v_Constrinf);
+    v_PlanePhys->registerPhysicObject();
+
+    root->addChild(new Node(v_Plane));
+    return root;
 }

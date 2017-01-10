@@ -1,26 +1,21 @@
-#ifndef CHARAKTER_H
-#define CHARAKTER_H
+#ifndef CHARACTERTICKER_H
+#define CHARACTERTICKER_H
 
+#include "idleobserver.h"
+#include "physics.h"
+#include <QElapsedTimer>
 
-#include "opengl.h"
-#include "scenemanager.h"
-#include "transformation.h"
-#include "keyboardtransformation.h"
-#include "mainwindow.h"
-#include "controllablecamera.h"
-#include "screenrenderer.h"
-#include "trianglemesh.h"
-#include "texture.h"
-#include "shader.h"
-#include "listener.h"
-#include "shadermanager.h"
-
-class Charakter
+// Klasse um unsere beiden Charaktere zu steuern
+class CharacterTicker : public IdleObserver
 {
 public:
-    Charakter();
-    ~Charakter();
-    KeyboardTransformation *ogerPfad = new KeyboardTransformation();
+    CharacterTicker(DynamicCharacterWithCam* dynaCam);
+    void doIt();
+
+private:
+    DynamicCharacterWithCam* m_DynaChWithCam;
+    // Timer für genaue Delta Zeitberechnung
+    QElapsedTimer m_Timer;
 };
 
-#endif // CHARAKTER_H
+#endif // CHARACTERTICKER_H
