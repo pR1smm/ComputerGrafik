@@ -41,6 +41,8 @@ DEFINES += SRCDIR=\\\"$${_PRO_FILE_PWD_}\\\"
 SOURCES += \
     mainscene.cpp \
     #myscene.cpp
+    charakter.cpp
 
 HEADERS += \
-    mainscene.h
+    mainscene.h \
+    charakter.h
