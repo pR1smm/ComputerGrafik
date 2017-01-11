@@ -7,10 +7,6 @@ TryCallback::TryCallback(CSlime *s){
 
 void TryCallback::callback(PhysicObject*& a, PhysicObject*& b, QList<CollisionPointInfo>& c)
 {
-    //über ein PhysicObject kann man auch wieder auf das Drawable zugreifen und es manipulieren
-    Drawable* colidewith = (Drawable*)b->getGeometry();
-
+    //Die Flag für´s springen zurücksetzen
     slime->inAir = false;
-
-
 }

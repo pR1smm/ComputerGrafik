@@ -1,18 +1,10 @@
 #ifndef CSLIME_H
 #define CSLIME_H
 #pragma once
-#include "opengl.h"
-#include "scene.h"
+
 #include "modeltransformation.h"
 #include "keyboardtransformation.h"
-#include "color.h"
-#include "simplecube.h"
-#include "simpleplane.h"
-#include "simplesphere.h"
 #include "trianglemesh.h"
-#include "texture.h"
-#include "SlimeTicker.h"
-#include "mainwindow.h"
 #include "scenemanager.h"
 #include "screenrenderer.h"
 #include "shadermanager.h"

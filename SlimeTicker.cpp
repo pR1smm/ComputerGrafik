@@ -18,8 +18,7 @@ void SlimeTicker::doIt()
 
     // Für Charakter mit verfolgerkamera
     v_MoveFlagsDynCh = 0;
-    // t f g h space zur steuerung, in dem Enum Movement flag stehen noch weitere bewegungen die der charakter machen
-    // kann
+    //in dem Enum Movement flag stehen noch weitere bewegungen die der charakter machen kann
     if (InputObserver::isKeyPressed('d'))
     {
         v_MoveFlagsDynCh |= MovementFlag::StraveRight;
@@ -37,8 +36,4 @@ void SlimeTicker::doIt()
     }
     // character in entsprechende richtungen bewegen
     m_DynaChWithCam->moveCharacter(time, v_MoveFlagsDynCh);
-
-     //qDebug() << "Obj x:" << m_DynaChWithCam->getPosition3DVector().x();
-    //InAit check
-
 }

@@ -12,7 +12,6 @@ class SlimeTicker : public IdleObserver
 {
 public:
     SlimeTicker(DynamicCharacterWithCam* dynaCam, CSlime* s);
-
     void doIt();
 private:
     DynamicCharacterWithCam* m_DynaChWithCam;

@@ -7,7 +7,7 @@ CSlime::CSlime(PhysicEngine *eng)
 
     v_PhysicEngine = eng;
 
-    //slime mesh erzeugen
+     //slime mesh erzeugen
      v_Slime = new Drawable(new TriangleMesh(path+QString("/modelstextures/slimey.obj")));
 
      //shader laden
@@ -34,6 +34,7 @@ CSlime::CSlime(PhysicEngine *eng)
      v_CharacterWithCam->setRelativeCamPosition(0.f, 2.f, 20.f);
      v_CharacterWithCam->setUpDownView(-5.0F);
 
+     //Elastizität setzen, damit die Objegte nicht rum buggen
      v_Slime->getPhysicObject()->setRestitution((0.0));
 
      //Objekt in der Physik engine registrieren
@@ -42,19 +43,16 @@ CSlime::CSlime(PhysicEngine *eng)
      // Character Ticker der für die Steuerung unser Charaktere veranwortlich ist
      SlimeTicker* ticker = new SlimeTicker(v_CharacterWithCam, this);
 
+
+     //Calback für Colisionserkenung erstellen
      TryCallback* callback = new TryCallback(this);
 
-     // Callback erzeugen der für ein Object der Klasse TryCallback
+     // CallbackReceiver erzeugen der für ein Object der Klasse TryCallback
      SpecificResponseObject<TryCallback>* v_CallbackReceiver =
        new SpecificResponseObject<TryCallback>(callback, &TryCallback::callback);
      // Der Oberfläche den Callback hinzufügen welcher bei einer Collision ausgeführt wird
      // Der Callback wird außerdem nur für das Object aufgerufen an das es angehangen wurde
      v_Slime->getPhysicObject()->addResponseObject(v_CallbackReceiver);
 }
-
-
-
-
-
 //getter
 Drawable* CSlime::getSlimeMesh(){ return v_Slime;}
