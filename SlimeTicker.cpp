@@ -1,13 +1,16 @@
-#include "charakter.h"
+#include "SlimeTicker.h"
 #include "inputobserver.h"
+#include "trycallback.h"
+#include "cslime.h"
 
-CharacterTicker::CharacterTicker(DynamicCharacterWithCam* dynaCam) : IdleObserver()
+SlimeTicker::SlimeTicker(DynamicCharacterWithCam* dynaCam, CSlime* s) : IdleObserver()
 {
     m_DynaChWithCam = dynaCam;
     m_Timer.restart();
+    slime = s;
 }
 
-void CharacterTicker::doIt()
+void SlimeTicker::doIt()
 {
     long long time = m_Timer.restart();
     // Flags sammeln in welche richtungen der Character gehen soll
@@ -17,28 +20,25 @@ void CharacterTicker::doIt()
     v_MoveFlagsDynCh = 0;
     // t f g h space zur steuerung, in dem Enum Movement flag stehen noch weitere bewegungen die der charakter machen
     // kann
-    if (InputObserver::isKeyPressed('t'))
+    if (InputObserver::isKeyPressed('d'))
     {
-        v_MoveFlagsDynCh |= MovementFlag::Forward;
+        v_MoveFlagsDynCh |= MovementFlag::StraveRight;
     }
-    if (InputObserver::isKeyPressed('f'))
+    if (InputObserver::isKeyPressed('a'))
     {
-        v_MoveFlagsDynCh |= MovementFlag::TurnLeft;
+        v_MoveFlagsDynCh |= MovementFlag::StraveLeft;
     }
-    if (InputObserver::isKeyPressed('g'))
-    {
-        v_MoveFlagsDynCh |= MovementFlag::Backward;
-    }
-    if (InputObserver::isKeyPressed('h'))
-    {
-        v_MoveFlagsDynCh |= MovementFlag::TurnRight;
-    }
-    if (InputObserver::isKeyPressed(Qt::Key_Space))
+    if (InputObserver::isKeyPressed(Qt::Key_Space)&&slime->inAir==false)
     {
         // momentan geht jump immer, vielleicht sollte man dort wo man springen soll einen trigger platzieren
         // und dann das movement flag setzen wenn man hineinläuft und den callback abarbeitet
         v_MoveFlagsDynCh |= MovementFlag::Jump;
+        slime->inAir = true;
     }
     // character in entsprechende richtungen bewegen
     m_DynaChWithCam->moveCharacter(time, v_MoveFlagsDynCh);
+
+     //qDebug() << "Obj x:" << m_DynaChWithCam->getPosition3DVector().x();
+    //InAit check
+
 }

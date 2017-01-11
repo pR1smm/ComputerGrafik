@@ -1,5 +1,6 @@
 #include "cslime.h"
 
+
 CSlime::CSlime(PhysicEngine *eng)
 {
     QString path(SRCDIR);
@@ -8,7 +9,6 @@ CSlime::CSlime(PhysicEngine *eng)
 
     //slime mesh erzeugen
      v_Slime = new Drawable(new TriangleMesh(path+QString("/modelstextures/slimey.obj")));
-
 
      //shader laden
      s = ShaderManager::getShader(path + QString("/shader/texture.vert"), path + QString("/shader/texture.frag"));
@@ -23,6 +23,7 @@ CSlime::CSlime(PhysicEngine *eng)
      //transformation setzen
      v_TransSlime = v_Slime->getProperty<ModelTransformation>();
      v_TransSlime->translate(0.f, 1.f, 2.f);
+     //v_Slime->getPhysicObject()->setRestitution(0.1f);
 
      // Character Objekt erzeugen mit einer Verfolgerkamera
      v_CharacterWithCam = v_PhysicEngine->createNewDynamicCharacterWithCam(v_Slime);
@@ -30,17 +31,27 @@ CSlime::CSlime(PhysicEngine *eng)
      // die x achsendrehung kann noch beeinflusst werden
      v_CharacterWithCam->setCam(SceneManager::instance()->getActiveContext()->getCamera());
      // Relative Kameraposition zum Drawable setzen
-     v_CharacterWithCam->setRelativeCamPosition(0.f, 4.f, 6.f);
-     v_CharacterWithCam->setUpDownView(-30.0F);
+     v_CharacterWithCam->setRelativeCamPosition(0.f, 2.f, 20.f);
+     v_CharacterWithCam->setUpDownView(-5.0F);
 
+     v_Slime->getPhysicObject()->setRestitution((0.0));
 
      //Objekt in der Physik engine registrieren
      v_Slime->getPhysicObject()->registerPhysicObject();
 
      // Character Ticker der für die Steuerung unser Charaktere veranwortlich ist
-     new CharacterTicker(v_CharacterWithCam);
+     SlimeTicker* ticker = new SlimeTicker(v_CharacterWithCam, this);
 
+     TryCallback* callback = new TryCallback(this);
+
+     // Callback erzeugen der für ein Object der Klasse TryCallback
+     SpecificResponseObject<TryCallback>* v_CallbackReceiver =
+       new SpecificResponseObject<TryCallback>(callback, &TryCallback::callback);
+     // Der Oberfläche den Callback hinzufügen welcher bei einer Collision ausgeführt wird
+     // Der Callback wird außerdem nur für das Object aufgerufen an das es angehangen wurde
+     v_Slime->getPhysicObject()->addResponseObject(v_CallbackReceiver);
 }
+
 
 
 

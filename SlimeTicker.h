@@ -5,17 +5,20 @@
 #include "physics.h"
 #include <QElapsedTimer>
 
+class CSlime;
+
 // Klasse um unsere beiden Charaktere zu steuern
-class CharacterTicker : public IdleObserver
+class SlimeTicker : public IdleObserver
 {
 public:
-    CharacterTicker(DynamicCharacterWithCam* dynaCam);
-    void doIt();
+    SlimeTicker(DynamicCharacterWithCam* dynaCam, CSlime* s);
 
+    void doIt();
 private:
     DynamicCharacterWithCam* m_DynaChWithCam;
     // Timer für genaue Delta Zeitberechnung
     QElapsedTimer m_Timer;
+    CSlime* slime;
 };
 
 #endif // CHARACTERTICKER_H

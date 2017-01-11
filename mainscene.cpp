@@ -8,13 +8,15 @@
 #include "simplesphere.h"
 #include "trianglemesh.h"
 #include "texture.h"
-#include "charakter.h"
+#include "SlimeTicker.h"
 #include "mainwindow.h"
 #include "scenemanager.h"
 #include "screenrenderer.h"
 #include "shadermanager.h"
 #include "texture.h"
 #include "shader.h"
+#include "trycallback.h"
+
 
 #include "cslime.h"
 
@@ -51,6 +53,7 @@ void setNodes(){
     root->addChild(new Node(slime->getSlimeMesh()));
     root->addChild(new Node(v_Plane));
 }
+
 void setPlane(){
     // Simple Plane laden
     v_Plane = new Drawable(new SimplePlane(20.f));
@@ -60,8 +63,8 @@ void setPlane(){
     PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
     v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
     v_PlanePhys->setConstructionInfo(v_Constrinf);
+    v_PlanePhys->setRestitution(0.0f);
     v_PlanePhys->registerPhysicObject();
-
 
 }
 
@@ -76,6 +79,11 @@ Node* initScene1()
 
     //Plane erzeugen (Temporär)
     setPlane();
+
+
+
+
+
 
     //setzt die Objekte in die scene
     setNodes();

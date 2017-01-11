@@ -11,13 +11,14 @@
 #include "simplesphere.h"
 #include "trianglemesh.h"
 #include "texture.h"
-#include "charakter.h"
+#include "SlimeTicker.h"
 #include "mainwindow.h"
 #include "scenemanager.h"
 #include "screenrenderer.h"
 #include "shadermanager.h"
 #include "texture.h"
 #include "shader.h"
+#include "trycallback.h"
 
 class CSlime
 {
@@ -25,16 +26,13 @@ public:
     CSlime(PhysicEngine* eng);
     Drawable* v_Slime;
     ModelTransformation* v_TransSlime;
-
     Texture *t;
     Shader *s;
-
     PhysicEngine* v_PhysicEngine;
-
     DynamicCharacterWithCam* v_CharacterWithCam;
-
-
     Drawable* getSlimeMesh();
+
+    bool inAir;
 };
 
 #endif // CSLIME_H

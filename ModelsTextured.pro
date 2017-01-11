@@ -41,10 +41,14 @@ DEFINES += SRCDIR=\\\"$${_PRO_FILE_PWD_}\\\"
 SOURCES += \
     mainscene.cpp \
     #myscene.cpp
-    charakter.cpp \
-    cslime.cpp
+    cslime.cpp \
+    SlimeTicker.cpp \
+    level.cpp \
+    trycallback.cpp
 
 HEADERS += \
     mainscene.h \
-    charakter.h \
-    cslime.h
+    cslime.h \
+    SlimeTicker.h \
+    level.h \
+    trycallback.h

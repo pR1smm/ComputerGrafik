@@ -10,7 +10,7 @@
 #include "simplesphere.h"
 #include "trianglemesh.h"
 #include "texture.h"
-#include "charakter.h"
+#include "SlimeTicker.h"
 #include "mainwindow.h"
 #include "scenemanager.h"
 #include "screenrenderer.h"
