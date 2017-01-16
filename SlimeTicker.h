@@ -18,6 +18,9 @@ private:
     // Timer für genaue Delta Zeitberechnung
     QElapsedTimer m_Timer;
     CSlime* slime;
+    int x=2;
+    QMatrix4x4 p;
+    bool amk = false;
 };
 
 #endif // CHARACTERTICKER_H
