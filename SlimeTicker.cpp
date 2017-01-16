@@ -16,6 +16,8 @@ void SlimeTicker::doIt()
     // Flags sammeln in welche richtungen der Character gehen soll
     unsigned long long v_MoveFlagsDynCh = 0;
 
+    m_DynaChWithCam->setJumpSpeed(10);
+
     // Für Charakter mit verfolgerkamera
     v_MoveFlagsDynCh = 0;
     //in dem Enum Movement flag stehen noch weitere bewegungen die der charakter machen kann

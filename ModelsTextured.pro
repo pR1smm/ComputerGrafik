@@ -44,13 +44,11 @@ SOURCES += \
     cslime.cpp \
     SlimeTicker.cpp \
     level.cpp \
-    trycallback.cpp \
-    gameobject.cpp
+    trycallback.cpp
 
 HEADERS += \
     mainscene.h \
     cslime.h \
     SlimeTicker.h \
     level.h \
-    trycallback.h \
-    gameobject.h
+    trycallback.h
