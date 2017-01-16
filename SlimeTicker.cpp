@@ -32,14 +32,14 @@ void SlimeTicker::doIt()
        if (amk==false)
        {
            if(x>100) amk= true;
-       p.scale(0.999,1,1);
+       p.scale(0.999,1,0.999);
        slime->v_TransSlime->setModelMatrix(p);
        x++;
        }
        else
        {
            if(x==1) amk = false;
-       p.scale(1.001,1,1);
+       p.scale(1.001,1,1.001);
        slime->v_TransSlime->setModelMatrix(p);
        x--;
         }
@@ -51,14 +51,14 @@ void SlimeTicker::doIt()
         if (amk==false)
         {
             if(x>100) amk= true;
-        p.scale(0.999,1,1);
+        p.scale(0.999,1,0.999);
         slime->v_TransSlime->setModelMatrix(p);
         x++;
         }
         else
         {
             if(x==1) amk = false;
-        p.scale(1.001,1,1);
+        p.scale(1.001,1,1.001);
         slime->v_TransSlime->setModelMatrix(p);
         x--;
          }
@@ -69,11 +69,15 @@ void SlimeTicker::doIt()
         // und dann das movement flag setzen wenn man hineinläuft und den callback abarbeitet
         v_MoveFlagsDynCh |= MovementFlag::Jump;
         slime->inAir = true;
-        //Rotation?
+
     }
-    //Rotation
-    p.rotate(0,0.5,0);
-    slime->v_TransSlime->setModelMatrix(p);
+    if (slime->inAir==true)
+    {
+        //Rotation
+        p.rotate(1,0,360,0);
+        slime->v_TransSlime->setModelMatrix(p);
+    }
+
     slime->v_TransSlime->setModelMatrix(p);
     // character in entsprechende richtungen bewegen
     m_DynaChWithCam->moveCharacter(time, v_MoveFlagsDynCh);
