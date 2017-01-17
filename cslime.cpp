@@ -38,6 +38,10 @@ CSlime::CSlime(PhysicEngine *eng)
      //Elastizität setzen, damit die Objegte nicht rum buggen
      v_Slime->getPhysicObject()->setRestitution(0.0f);
 
+     PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
+     v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
+     v_Slime->getPhysicObject()->setConstructionInfo(v_Constrinf);
+
 
      //Objekt in der Physik engine registrieren
      v_Slime->getPhysicObject()->registerPhysicObject();

@@ -23,6 +23,11 @@ public:
     PhysicEngine* v_PhysicEngine;
     Node* root;
     void setLuefter();
+    void setAntenne(int x, int y, int z);
+    void setHaus(int x, int y, int z);
+    void setStromkasten(int x, int y, int z);
+    void setStromkabel(int x, int y, int z);
+    void setRohr(int x, int y, int z);
 };
 
 #endif // LEVEL_H
