@@ -21,7 +21,7 @@ void Level::setPlane(){
     v_Plane->setStaticGeometry(true); // Der Oberfläche ein statisches verhalten zuweisen
     PhysicObject* v_PlanePhys = v_PhysicEngine->createNewPhysicObject(v_Plane);
     c = v_Plane->getProperty<Color>();
-    c->setValue(0.7F,0.7F,0.7F,1.0F);
+    c->setValue(.3F,0.65,0.81F,1.0F);
     PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
     v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
     v_PlanePhys->setConstructionInfo(v_Constrinf);
