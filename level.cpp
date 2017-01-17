@@ -30,13 +30,28 @@ void Level::buildLevel(){
 
 void Level::setLuefter(){
     QString path(SRCDIR);
-    Geometry* g = new TriangleMesh(path + QString("/modelstextures/lueftungskasten.obj"));
-    Drawable* model = new Drawable(g);
+
+    Drawable *model = new Drawable(new TriangleMesh(path+QString("/modelstextures/lueftungskasten.obj")));
     Texture* t;
     Shader* s = ShaderManager::getShader(path + QString("/shader/texture.vert"), path + QString("/shader/texture.frag"));
+    Transformation *pos = new Transformation();
+
+    Node* posNode = new Node(pos);
+    Node* modelNode = new Node(model);
+
+    //Texturen laden
+    t = model->getProperty<Texture>();
+    t->loadPicture(path + QString("/modelstextures/lueftungskasten/None_Base_Color.png"));
+
+    //Shader fuer Textur setzen
+    model->setShader(s);
+
+    pos->translate(2,0,1);
 
     model->setStaticGeometry(true);
-    PhysicObject* modelPhys= v_PhysicEngine->createNewPhysicObject(model);
+
+
+    PhysicObject* modelPhys = v_PhysicEngine->createNewPhysicObject(model);
     PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
     v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
     modelPhys->setConstructionInfo(v_Constrinf);
@@ -44,25 +59,8 @@ void Level::setLuefter(){
     modelPhys->registerPhysicObject();
 
 
-    //Texturen laden
-    t = model->getProperty<Texture>();
-    t->loadPicture(path + QString("/modelstextures/lueftungskasten/None_Base_Colore.png"));
-
-    model->setShader(s);
-
-    Transformation* pos = new Transformation();
-
-    pos->translate(0,3,6);
-    //pos->rotate(90,1,0,0);
-    //pos->scale(1.3,1.3,1.3);
-
-
-
-
-    Node* transNode = new Node(pos);
-
-    root->addChild(transNode);
-    transNode->addChild(new Node(model));
+    root->addChild(posNode);
+    posNode->addChild(modelNode);
 }
 
 void Level::setRoof()

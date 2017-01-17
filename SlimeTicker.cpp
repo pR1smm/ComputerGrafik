@@ -14,7 +14,7 @@ SlimeTicker::SlimeTicker(DynamicCharacterWithCam* dynaCam, CSlime* s) : IdleObse
 void SlimeTicker::doIt()
 {
 
-
+    //slime->v_TransSlime->translate(slime->v_TransSlime->getModelMatrix().);
     long long time = m_Timer.restart();
     // Flags sammeln in welche richtungen der Character gehen soll
     unsigned long long v_MoveFlagsDynCh = 0;

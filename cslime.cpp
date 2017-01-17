@@ -19,6 +19,7 @@ CSlime::CSlime(PhysicEngine *eng)
 
      //shader setzen
      v_Slime->setShader(s);
+     //v_Slime->setStaticGeometry(true);
 
      //transformation setzen
      v_TransSlime = v_Slime->getProperty<ModelTransformation>();
