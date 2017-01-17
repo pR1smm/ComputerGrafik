@@ -74,7 +74,7 @@ void SlimeTicker::doIt()
     if (slime->inAir==true)
     {
         //Rotation
-        p.rotate(1,0,360,0);
+        p.rotate(0.5,0,360,0);
         slime->v_TransSlime->setModelMatrix(p);
     }
 

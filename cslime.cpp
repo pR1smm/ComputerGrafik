@@ -23,7 +23,7 @@ CSlime::CSlime(PhysicEngine *eng)
      //transformation setzen
      v_TransSlime = v_Slime->getProperty<ModelTransformation>();
      v_TransSlime->translate(0.f, 1.f, 2.f);
-     //v_Slime->getPhysicObject()->setRestitution(0.1f);
+     //v_Slime->getPhysicObject()->setRestitution(0.0f);
 
      // Character Objekt erzeugen mit einer Verfolgerkamera
      v_CharacterWithCam = v_PhysicEngine->createNewDynamicCharacterWithCam(v_Slime);
@@ -35,7 +35,7 @@ CSlime::CSlime(PhysicEngine *eng)
      v_CharacterWithCam->setUpDownView(-5.0F);
 
      //Elastizität setzen, damit die Objegte nicht rum buggen
-     v_Slime->getPhysicObject()->setRestitution((0.0));
+     v_Slime->getPhysicObject()->setRestitution(0.0f);
 
 
      //Objekt in der Physik engine registrieren

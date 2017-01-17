@@ -40,6 +40,7 @@ void Level::setLuefter(){
     PhysicObjectConstructionInfo* v_Constrinf = new PhysicObjectConstructionInfo();
     v_Constrinf->setCollisionHull(CollisionHull::BoxAABB); // Automatische generierung einer Box
     modelPhys->setConstructionInfo(v_Constrinf);
+    modelPhys->setRestitution(0.0f);
     modelPhys->registerPhysicObject();
 
 
