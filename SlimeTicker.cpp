@@ -31,7 +31,7 @@ void SlimeTicker::doIt()
        //Skaalierung
        if (amk==false)
        {
-           if(x>100) amk= true;
+           if(x>250) amk= true;
        p.scale(0.999,1,0.999);
        slime->v_TransSlime->setModelMatrix(p);
        x++;
@@ -50,7 +50,7 @@ void SlimeTicker::doIt()
         //Skalierung
         if (amk==false)
         {
-            if(x>100) amk= true;
+            if(x>250) amk= true;
         p.scale(0.999,1,0.999);
         slime->v_TransSlime->setModelMatrix(p);
         x++;
@@ -74,7 +74,7 @@ void SlimeTicker::doIt()
     if (slime->inAir==true)
     {
         //Rotation
-        p.rotate(1,0,360,0);
+        p.rotate(0.5,0,360,0);
         slime->v_TransSlime->setModelMatrix(p);
     }
 
