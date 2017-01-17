@@ -25,9 +25,12 @@ void SceneManager::initScenes()
     // Vorsicht: Die Szene muss initialisiert sein, bevor das Fenster verändert wird (Fullscreen)
     SceneManager::instance()->setActiveScene(myScene);
     SceneManager::instance()->setActiveContext(myContextNr);
-        SceneManager::instance()->setFullScreen();
+      //nager::instance()->setFullScreen();
 }
 void init(){
+    //Sounds initialisieren
+    SoundManager::instance()->registerSound(path+QString("/sounds/jump.wav"));
+SoundManager::instance()->setAmbientSoundLoop(path+QString("/sounds/song.wav"));
     light1 = new SunLight;
     // Physic Engine Erzeugen und einen Pointer auf Instanz holen
     PhysicEngineManager::createNewPhysicEngineSlot(PhysicEngineName::BulletPhysicsLibrary);

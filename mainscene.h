@@ -13,6 +13,7 @@
 #include "shadermanager.h"
 #include "shadertimed.h"
 #include "texture.h"
+#include "soundmanager.h"
 
 
 class mainScene

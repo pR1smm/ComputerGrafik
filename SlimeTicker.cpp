@@ -2,6 +2,7 @@
 #include "inputobserver.h"
 #include "trycallback.h"
 #include "cslime.h"
+#include "soundmanager.h"
 
 SlimeTicker::SlimeTicker(DynamicCharacterWithCam* dynaCam, CSlime* s) : IdleObserver()
 {
@@ -71,12 +72,15 @@ void SlimeTicker::doIt()
         x--;
          }
     }
+
     if (InputObserver::isKeyPressed(Qt::Key_Space)&&slime->inAir==false)
     {
         // momentan geht jump immer, vielleicht sollte man dort wo man springen soll einen trigger platzieren
         // und dann das movement flag setzen wenn man hineinläuft und den callback abarbeitet
         v_MoveFlagsDynCh |= MovementFlag::Jump;
         slime->inAir = true;
+        SoundManager::instance()->setVolume(100);
+        SoundManager::instance()->playSound(1);
 
     }
     if (slime->inAir==true)
