@@ -9,4 +9,6 @@ void TryCallback::callback(PhysicObject*& a, PhysicObject*& b, QList<CollisionPo
 {
     //Die Flag für´s springen zurücksetzen
     slime->inAir = false;
+    Drawable* colidewith = (Drawable*)b->getGeometry();
+   // colidewith->getProperty<ModelTransformation>()->translate(0.f, 3.f, 0.f);
 }

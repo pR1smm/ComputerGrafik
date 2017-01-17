@@ -19,8 +19,16 @@ void SlimeTicker::doIt()
     // Flags sammeln in welche richtungen der Character gehen soll
     unsigned long long v_MoveFlagsDynCh = 0;
 
-    m_DynaChWithCam->setJumpSpeed(10);
+    m_DynaChWithCam->setJumpSpeed(8);
 
+    //posgetter
+    /*if(m_DynaChWithCam->getPosition3DVector().y() <= -2){
+        //m_DynaChWithCam->setPosition(QVector3D(0,1,0));
+        //transformation setzen
+        //slime->getSlimeMesh()->getProperty<ModelTransformation>()->translate(0.f-;, 1.f, 1.f);
+        slime->getSlimeMesh()->getModelMatrix().translate(m_DynaChWithCam->getPosition3DVector().x(),m_DynaChWithCam->getPosition3DVector().y(),0);
+    }
+*/
     // Für Charakter mit verfolgerkamera
     v_MoveFlagsDynCh = 0;
     //in dem Enum Movement flag stehen noch weitere bewegungen die der charakter machen kann

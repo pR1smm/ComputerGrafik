@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/hello_glsl.vert</file>
+        <file>shaders/hello_glsl.frag</file>
+        <file>shaders/morph.vert</file>
+        <file>shaders/morph.frag</file>
+        <file>shaders/PhongFragment.vert</file>
+        <file>shaders/PhongPassThrough.frag</file>
+        <file>shaders/PhongVL_Half.vert</file>
+        <file>shaders/PhongVL.vert</file>
+        <file>shaders/toon.vert</file>
+        <file>shaders/toon.frag</file>
+        <file>shaders/cloud.vert</file>
+        <file>shaders/cloud.frag</file>
+        <file>shaders/brick.frag</file>
+        <file>shaders/brick.vert</file>
+        <file>shaders/PhongFragment.frag</file>
+        <file>shaders/common.vert.inc</file>
+        <file>shaders/commonlight.vert.inc</file>
+        <file>shaders/commonlightmatdefs.inc</file>
+        <file>shaders/commonlightmodels.inc</file>
+        <file>shaders/texture.frag</file>
+        <file>shaders/texture.vert</file>
+    </qresource>
+</RCC>

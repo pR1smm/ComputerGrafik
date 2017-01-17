@@ -46,6 +46,22 @@ SOURCES += \
     level.cpp \
     trycallback.cpp
 
+OTHER_FILES += \
+    ../../Data/Shader/brick1.frag \
+    ../../Data/Shader/brick.vert \
+    ../../Data/Shader/toon.vert \
+    ../../Data/Shader/toon.frag \
+    ../../Data/Shader/PhongVL_Half.vert \
+    ../../Data/Shader/PhongFragment.vert \
+    ../../Data/Shader/PhongFragment.frag \
+    ../../Data/Shader/hello_glsl.vert \
+    ../../Data/Shader/hello_glsl.frag \
+    ../../Data/Shader/cloud.vert \
+    ../../Data/Shader/cloud.frag
+
+RESOURCES += \
+    MyShaders.qrc
+
 HEADERS += \
     mainscene.h \
     cslime.h \

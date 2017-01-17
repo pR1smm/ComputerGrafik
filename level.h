@@ -22,7 +22,7 @@ public:
     Drawable* v_Plane;
     PhysicEngine* v_PhysicEngine;
     Node* root;
-    void setLuefter();
+    void setLuefter(int x, int y, int z);
     void setAntenne(int x, int y, int z);
     void setHaus(int x, int y, int z);
     void setStromkasten(int x, int y, int z);

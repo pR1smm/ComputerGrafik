@@ -9,6 +9,7 @@ PhysicEngine* v_PhysicEngine;
 Node* root;
 CSlime* slime;
 Level* level;
+SunLight* light1;
 
 QString path(SRCDIR);
 
@@ -24,13 +25,19 @@ void SceneManager::initScenes()
     // Vorsicht: Die Szene muss initialisiert sein, bevor das Fenster verändert wird (Fullscreen)
     SceneManager::instance()->setActiveScene(myScene);
     SceneManager::instance()->setActiveContext(myContextNr);
-    //    SceneManager::instance()->setFullScreen();
+        SceneManager::instance()->setFullScreen();
 }
 void init(){
+    light1 = new SunLight;
     // Physic Engine Erzeugen und einen Pointer auf Instanz holen
     PhysicEngineManager::createNewPhysicEngineSlot(PhysicEngineName::BulletPhysicsLibrary);
     v_PhysicEngine = PhysicEngineManager::getPhysicEngineBySlot(v_Slot);
-    root = new Node;
+    root = new Node(light1);
+
+    light1->setDiffuse(0.7f, 0.7f, 0.7f);
+    light1->setSpecular(0.6f, 0.6f, 0.6f);
+    light1->setAmbient(0.6f, 0.6f, 0.6f);
+    light1->turnOn();
 }
 
 Node* initScene1()

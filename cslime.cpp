@@ -1,5 +1,5 @@
 #include "cslime.h"
-
+#include "sunlight.h"
 
 CSlime::CSlime(PhysicEngine *eng)
 {
@@ -7,15 +7,25 @@ CSlime::CSlime(PhysicEngine *eng)
 
     v_PhysicEngine = eng;
 
+
      //slime mesh erzeugen
      v_Slime = new Drawable(new TriangleMesh(path+QString("/modelstextures/slimey.obj")));
-
-     //shader laden
-     s = ShaderManager::getShader(path + QString("/shader/texture.vert"), path + QString("/shader/texture.frag"));
-
      //textur setzen
      t=v_Slime->getProperty<Texture>();
      t->loadPicture(path+QString("/modelstextures/Slimey_texture.png"));
+
+     //shaderanpassungen
+    Material* m;
+     m = v_Slime->getProperty<Material>();
+
+     //m->setDiffuse(0.f, 0.f, 0.f, 1.f);
+     //m->setAmbient(0.f, .0f, .0f, 1.f);
+     //m->setSpecular(0.8f, .8f, .8f, .7f);
+     m->setShininess(8.f);
+
+     //shader laden
+     s = ShaderManager::getShader(QString("://shaders/texture.vert"), QString("://shaders/texture.frag"));
+
 
      //shader setzen
      v_Slime->setShader(s);
@@ -23,7 +33,7 @@ CSlime::CSlime(PhysicEngine *eng)
 
      //transformation setzen
      v_TransSlime = v_Slime->getProperty<ModelTransformation>();
-     v_TransSlime->translate(0.f, 1.f, 2.f);
+     v_TransSlime->translate(0.f, 1.f, 1.f);
      //v_Slime->getPhysicObject()->setRestitution(0.0f);
 
      // Character Objekt erzeugen mit einer Verfolgerkamera

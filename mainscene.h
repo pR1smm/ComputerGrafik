@@ -8,6 +8,12 @@
 #include "scenemanager.h"
 #include "screenrenderer.h"
 #include "level.h"
+#include "sunlight.h"
+#include "material.h"
+#include "shadermanager.h"
+#include "shadertimed.h"
+#include "texture.h"
+
 
 class mainScene
 {
